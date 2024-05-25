@@ -31,9 +31,10 @@ const createUser = async (req, res, next) => {
     req.user = await users.create(req.body);
     next();
   } catch (error) {
-    res.status(400).send("Ошибка при создании пользователя");
+    res.setHeader("Content-Type", "application/json");
+        res.status(400).send(JSON.stringify({ message: "Ошибка создания пользователя" }));
   }
-};
+}; 
 
 const findUserById = async (req, res, next) => {
   console.log("GET /api/users/:id");
